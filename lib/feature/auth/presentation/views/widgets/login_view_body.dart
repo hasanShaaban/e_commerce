@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_commerce/core/services/custom_bloc_observer.dart';
 import 'package:e_commerce/core/utils/app_colors.dart';
 import 'package:e_commerce/core/utils/app_images.dart';
@@ -84,14 +86,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   image: Assets.imagesGoogleIcon),
               const SizedBox(height: 16),
               SocialButton(
-                  onPressed: () {},
-                  title: 'تسجيل بواسطة أبل',
-                  image: Assets.imagesAppleIcon),
-              const SizedBox(height: 16),
-              SocialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<SigninCubit>().signInWithFacebook();
+                  },
                   title: 'تسجيل بواسطة فيسبوك',
                   image: Assets.imagesFacebookIcon),
+              Platform.isIOS
+                  ? SocialButton(
+                      onPressed: () {},
+                      title: 'تسجيل بواسطة أبل',
+                      image: Assets.imagesAppleIcon)
+                  : const SizedBox(height: 16),
+              
             ],
           ),
         ),
